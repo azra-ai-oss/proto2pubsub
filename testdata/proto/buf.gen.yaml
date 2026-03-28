@@ -1,0 +1,6 @@
+version: v2
+plugins:
+  - local: protoc-gen-proto2pubsub
+    out: ../golden
+    opt:
+      - root_message=Report

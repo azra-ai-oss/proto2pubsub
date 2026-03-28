@@ -1,0 +1,3 @@
+version: v1
+name: buf.build/protocgen/proto2pubsub
+plugin_version: v0.1.0

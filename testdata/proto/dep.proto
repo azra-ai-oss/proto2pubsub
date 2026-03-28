@@ -1,0 +1,28 @@
+// External dependency to test cross-file type inlining.
+syntax = "proto3";
+
+package dep.v1;
+
+option go_package = "github.com/protocgen/proto2pubsub/testdata/deppb";
+
+// ModelResult represents ML model output — simulates a cross-module import
+// like datascience_schema/v1/model_result.proto in real usage.
+message ModelResult {
+  string model_version = 1;
+  repeated PipelineDetail pipeline_details = 2;
+  string prediction = 3;
+}
+
+// PipelineDetail is a nested dependency of ModelResult.
+message PipelineDetail {
+  string name = 1;
+  double threshold = 2;
+  string value = 3;
+  Classes classes = 4;
+}
+
+// Classes holds classification probabilities.
+message Classes {
+  double negative = 1;
+  double positive = 2;
+}

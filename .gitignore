@@ -1,0 +1,17 @@
+# Binaries
+proto2pubsub
+protoc-gen-proto2pubsub
+dist/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Nix
+.direnv/
+result
+
+# Test output
+testdata/output/

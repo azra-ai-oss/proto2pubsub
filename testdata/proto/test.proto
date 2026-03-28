@@ -1,0 +1,51 @@
+// Test proto exercising every feature of proto2pubsub.
+// This file uses imports, annotations, and multiple types that all need
+// to be flattened into a single self-contained schema.
+syntax = "proto3";
+
+package test.v1;
+
+option go_package = "github.com/protocgen/proto2pubsub/testdata/testpb";
+
+import "google/protobuf/timestamp.proto";
+import "dep.proto";
+
+// Priority level for a finding.
+enum Priority {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;
+  PRIORITY_MEDIUM = 2;
+  PRIORITY_HIGH = 3;
+  PRIORITY_CRITICAL = 4;
+}
+
+// Report is the root message for the Pub/Sub schema.
+message Report {
+  string id = 1;
+  string patient_mrn = 2;
+  string report_text = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp last_modified = 5;
+  Priority priority = 6;
+  repeated Finding findings = 7;
+  dep.v1.ModelResult model_result = 8;
+  map<string, string> metadata = 9;
+  optional string nickname = 10;
+  bool deleted = 11;
+  int64 external_id = 12;
+  double score = 13;
+
+  // Contact method for the ordering physician.
+  oneof contact {
+    string phone = 14;
+    string email = 15;
+  }
+}
+
+// Finding is a nested message referenced by Report.
+message Finding {
+  string description = 1;
+  string location = 2;
+  Priority severity = 3;
+  google.protobuf.Timestamp found_at = 4;
+}
