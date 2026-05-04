@@ -24,11 +24,44 @@ If your `.proto` files use imports, annotations, or well-known types like
 
 ## Installation
 
+### From the Go module registry
+
 ```bash
 go install github.com/protocgen/proto2pubsub@latest
 ```
 
 Or download a pre-built binary from [Releases](https://github.com/protocgen/proto2pubsub/releases).
+
+### Build from source (local development)
+
+Clone the repository and install the binary directly from your working tree.
+This is useful when iterating on the plugin locally or when you need changes
+that haven't been published yet.
+
+```bash
+git clone https://github.com/protocgen/proto2pubsub.git
+cd proto2pubsub
+
+# Build the binary in the current directory
+go build -o protoc-gen-proto2pubsub .
+
+# Install it to $(go env GOPATH)/bin so it's available globally
+go install .
+```
+
+Verify the install:
+
+```bash
+which protoc-gen-proto2pubsub
+# e.g. /Users/<you>/.local/bin/protoc-gen-proto2pubsub
+```
+
+> **Note:** Make sure `$(go env GOPATH)/bin` (commonly `~/.local/bin` or `~/go/bin`)
+> is on your `PATH`. Add one of the following to your shell profile if needed:
+> ```bash
+> export PATH="$HOME/.local/bin:$PATH"   # or
+> export PATH="$HOME/go/bin:$PATH"
+> ```
 
 ## Usage
 
