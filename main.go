@@ -24,7 +24,6 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"path"
 	"strings"
 
 	"google.golang.org/protobuf/compiler/protogen"
@@ -55,7 +54,7 @@ func main() {
 		}
 		if fd.Options.GoPackage == nil || *fd.Options.GoPackage == "" {
 			// Derive a plausible (but unused) import path from the file name.
-			pkg := "proto2pubsub.gen/" + strings.TrimSuffix(path.Base(fd.GetName()), ".proto")
+			pkg := "proto2pubsub.gen/" + strings.TrimSuffix(fd.GetName(), ".proto")
 			fd.Options.GoPackage = &pkg
 		}
 	}
@@ -113,5 +112,5 @@ func fatalf(format string, args ...any) {
 	}
 	out, _ := proto.Marshal(resp)
 	os.Stdout.Write(out) //nolint:errcheck
-	os.Exit(1)
+	os.Exit(0)
 }
